@@ -5,10 +5,15 @@ The Complete Guide to Angular 7
 ```cmd
     ng serve
 ```
-This command help testing easily our app locally while developing.
+This command helps testing easily our app locally while developing.
 See more about the Angular CLI [here](https://cli.angular.io/).
 
-Import "**Typescript**" form feature, to store the input in into this "name" property using syntax below:
+Import "**Typescript**" form feature to store the input in into the "name" property by using this syntax below:
 ```html
     [(ngModel)]="name"
+```
+
+Install locally bootstrap and make clean start project:
+```cmd
+    npm install --save bootstrap@3
 ```
