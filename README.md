@@ -35,3 +35,31 @@ After a bit changes, we get these html tag codes like that
     ...
 </body
 ```
+Two ways to use data binding:
+1. Using *$event*:
+```html
+    <input
+        type="text"
+        class="form-control"
+        (input)="onUpdateServerName($event)">
+```
+
+- And the main script:
+```Typescript
+    onUpdateServerName(event: Event){
+        this.serverName = (<HTMLInputElement>event.target).value;
+    }
+```
+2. Using *ngModel*:
+- It should be the better method by it's simplicity. First, we need to add the *FormsModule*:
+```Typescript
+    //app.module.ts
+    import { FormsModule } from '@angular/forms'
+```
+- Then, easy stuff is remaining like that:
+```html
+    <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="serverName">
+```
