@@ -63,3 +63,33 @@ Two ways to use data binding:
         class="form-control"
         [(ngModel)]="serverName">
 ```
+If-else statements:
+```html
+    <p *ngIf="serverCreatedFlag; else noServer">Server {{ serverName }} was created successfully!</p>
+    <ng-template #noServer>
+        <p>No server was created.</p>
+    </ng-template>
+```
+
+How to dinamically change style of element:
+1. Using *ngStyle*:
+
+    This method allows us to dynamically assign a style itself.
+```html
+    <p [ngStyle]="{backgroundColor: getBackgroundColor()}"></p>
+```
+2. Using *ngClass*:
+    
+    This method allows us to dynamically add or remove CSS-classes.
+```html
+    <p 
+        ...
+        [ngClass]="{online: getServerStatus() === 'online'}"
+    ></p>
+```
+3. Using *ngFor*:
+    
+    It would be nicer to have an array of service which adds them dynamically like that:
+```html
+    <app-server *ngFor="let server of servers"></app-server>
+```

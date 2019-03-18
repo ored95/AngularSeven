@@ -1,1 +1,4 @@
-<p>The {{ 'server' }} {{ serverID }} is now {{ getServerStatus() }}.</p>
+<p 
+    [ngStyle]="{backgroundColor: getBackgroundColor()}"
+    [ngClass]="{online: getServerStatus() === 'online'}"
+>The {{ 'server' }} {{ serverID }} is now {{ getServerStatus() }}.</p>
