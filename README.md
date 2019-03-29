@@ -93,3 +93,28 @@ How to dinamically change style of element:
 ```html
     <app-server *ngFor="let server of servers"></app-server>
 ```
+
+## Part 3. The Basics
+Recommend using Bootstrap 3+
+* Why Bootstrap 3? See this [issue](https://github.com/angular/angular-cli/issues/3411). 
+* Take a look at styling Angular 7 using Bootstrap 4+ [here](https://codeburst.io/getting-started-with-angular-7-and-bootstrap-4-styling-6011b206080)
+
+### Header
++ See more how navigation work [here](https://getbootstrap.com/docs/3.4/examples/navbar-fixed-top/).
+
+### Body
+1. Adding styles to gird our body after header
+```css
+    body {
+        min-height: 2000px;
+        padding-top: 70px;
+    }
+    
+    .btn-space {
+        margin-right: 5px
+    }
+```
+2. Adding Models
+
+    * Recipe (name, description, imagePath)
+    * Ingredient (name, amount)
