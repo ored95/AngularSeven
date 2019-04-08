@@ -118,3 +118,47 @@ Recommend using Bootstrap 3+
 
     * Recipe (name, description, imagePath)
     * Ingredient (name, amount)
+
+## Part 3. Debugging
+* Using [Augury](https://augury.rangle.io/) to dive into our Angular Apps.
+
+1. Assigning an Alias to custom properties:
+```ts
+    @Input('srvElement') element : {type: string, name: string, content: string};
+```
+2. Binding to custom events
+```html
+    <app-server 
+        (serverCreated)="onServerAdded($event)"
+        (blueprintCreated)="onBlueprintAdded($event)">
+    </app-server>
+```
+* Now, let's see how to emit an object in Angular
+
+```ts
+    import { EventEmitter, Output } from '@angular/core';
+
+    @Output() serverCreated = new EventEmitter<{serverName: string, serverContent: string}>();
+    
+    newServerName = ''
+    newServerContent = ''
+
+    onServerAdded() {
+        this.serverCreated.emit({
+            serverName: this.newServerName,
+            serverContent: this.newServerContent
+        });
+    }
+```
+* Here, the method onServerAdded() is also declared in other script file (up/down level)
+```ts
+    serverElements = [];
+
+    onServerAdded(serverData: {serverName: string, serverContent: string}) {
+        this.serverElements.push({
+            type: 'server',
+            name: serverData.serverName,
+            content: serverData.serverContent
+        });
+    }
+```

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 @Component({
     selector: 'app-server',
@@ -23,5 +23,28 @@ export class ServerComponent {
 
     getBackgroundColor(){
         return (this.serverStatus == "online")? "green": "gray";
+    }
+
+    ngOnInit() {
+
+    }
+
+    @Output() serverCreated = new EventEmitter<{serverName: string, serverContent: string}>();
+    @Output() blueprintCreated = new EventEmitter<{serverName: string, serverContent: string}>();
+    newServerName = ''
+    newServerContent = ''
+
+    onServerAdded() {
+        this.serverCreated.emit({
+            serverName: this.newServerName,
+            serverContent: this.newServerContent
+        });
+    }
+
+    onBlueprintAdded() {
+        this.blueprintCreated.emit({
+            serverName: this.newServerName,
+            serverContent: this.newServerContent
+        });
     }
 }

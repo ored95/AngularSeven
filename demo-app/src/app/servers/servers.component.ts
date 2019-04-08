@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-servers',      // type #1: typescript optimal
@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './servers.component.html',
   styleUrls: ['./servers.component.css']
 })
+
 export class ServersComponent implements OnInit {
   allowNewServer = false;
   serverCreationStatus = "No server was created!";
@@ -14,6 +15,8 @@ export class ServersComponent implements OnInit {
   serverCreatedFlag = false;
   servers = ["Server A", "Server B"];
 
+  @Input() element : {type: string, name: string, content: string};
+  
   constructor() { 
     setTimeout(() => {
       this.allowNewServer = true;   
