@@ -166,3 +166,21 @@ Recommend using Bootstrap 3+
 ```ts
     @Output('bpCreated') blueprintCreated = new EventEmitter<{serverName: string, serverContent: string}>();
 ```
+* Using Local References in Templates
+```html
+    <input
+        type="text"
+        class="form-control"
+        #addedServer>
+    <button
+        class="btn btn-primary"
+        (click)="onServerAdded(addedServer)">Add Server</button>
+```
+```ts
+    onServerAdded(addedServer: HTMLInputElement) {
+        this.serverCreated.emit({
+            serverName: addedServer.value,
+            serverContent: this.newServerContent
+        });
+    }
+```

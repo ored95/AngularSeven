@@ -34,9 +34,9 @@ export class ServerComponent {
     newServerName = ''
     newServerContent = ''
 
-    onServerAdded() {
+    onServerAdded(addedServer: HTMLInputElement) {
         this.serverCreated.emit({
-            serverName: this.newServerName,
+            serverName: addedServer.value,
             serverContent: this.newServerContent
         });
     }
