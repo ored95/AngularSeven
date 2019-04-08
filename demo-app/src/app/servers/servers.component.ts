@@ -15,7 +15,7 @@ export class ServersComponent implements OnInit {
   serverCreatedFlag = false;
   servers = ["Server A", "Server B"];
 
-  @Input() element : {type: string, name: string, content: string};
+  @Input('srvElement') element : {type: string, name: string, content: string};
   
   constructor() { 
     setTimeout(() => {

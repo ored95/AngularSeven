@@ -162,3 +162,7 @@ Recommend using Bootstrap 3+
         });
     }
 ```
+* How to listen from outside?
+```ts
+    @Output('bpCreated') blueprintCreated = new EventEmitter<{serverName: string, serverContent: string}>();
+```

@@ -1,14 +1,14 @@
 <div class="container">
     <app-server 
         (serverCreated)="onServerAdded($event)"
-        (blueprintCreated)="onBlueprintAdded($event)"></app-server>
+        (bpCreated)="onBlueprintAdded($event)"></app-server>
     <div class="row">
         <div class="col-xs-12">
             <h3>The Basics</h3>
             <hr>
             <app-servers
                 *ngFor="let serverElement of serverElements"
-                [element]="serverElement"></app-servers>
+                [srvElement]="serverElement"></app-servers>
             <!-- <div app-servers></div> -->
             <!-- <div class="app-servers"></div> -->
         </div>
