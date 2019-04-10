@@ -8,7 +8,12 @@
             <hr>
             <app-servers
                 *ngFor="let serverElement of serverElements"
-                [srvElement]="serverElement"></app-servers>
+                [srvElement]="serverElement">
+                <p>
+                    <strong *ngIf="serverElement.type === 'server'" style="color: red">{{ serverElement.content }}</strong>
+                    <em *ngIf="serverElement.type === 'blueprint'">{{ serverElement.content }}</em>
+                </p>
+            </app-servers>
             <!-- <div app-servers></div> -->
             <!-- <div class="app-servers"></div> -->
         </div>
