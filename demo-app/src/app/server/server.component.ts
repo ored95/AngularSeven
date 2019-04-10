@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
     selector: 'app-server',
@@ -31,20 +31,21 @@ export class ServerComponent {
 
     @Output() serverCreated = new EventEmitter<{serverName: string, serverContent: string}>();
     @Output('bpCreated') blueprintCreated = new EventEmitter<{serverName: string, serverContent: string}>();
-    newServerName = ''
-    newServerContent = ''
+    // newServerName = ''
+    // newServerContent = ''
+    @ViewChild('newServerContent') serverContentInput: ElementRef;
 
-    onServerAdded(addedServer: HTMLInputElement) {
+    onServerAdded(addedServerName: HTMLInputElement) {
         this.serverCreated.emit({
-            serverName: addedServer.value,
-            serverContent: this.newServerContent
+            serverName: addedServerName.value,
+            serverContent: this.serverContentInput.nativeElement.value
         });
     }
 
-    onBlueprintAdded() {
+    onBlueprintAdded(addedServerName: HTMLInputElement) {
         this.blueprintCreated.emit({
-            serverName: this.newServerName,
-            serverContent: this.newServerContent
+            serverName: addedServerName.value,
+            serverContent: this.serverContentInput.nativeElement.value
         });
     }
 }
