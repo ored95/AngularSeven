@@ -1,4 +1,29 @@
-<p 
+<!-- <p 
     [ngStyle]="{backgroundColor: getBackgroundColor()}"
     [ngClass]="{online: getServerStatus() === 'online'}"
->The {{ 'server' }} {{ serverID }} is now {{ getServerStatus() }}.</p>
+>The {{ 'server' }} {{ serverID }} is now {{ getServerStatus() }}.</p> -->
+
+<div class="row">
+    <div class="col-xs-12">
+        <p>Add new Servers or Blueprints!</p>
+        <label>ServerName</label>
+        <!-- <input type="text" class="form-control" [(ngModel)]="newServerName"> -->
+        <input
+            type="text"
+            class="form-control"
+            #newServerName>
+        <label>ServerContent</label>
+        <!-- <input type="text" class="form-control" [(ngModel)]="newServerContent"> -->
+        <input 
+            type="text" 
+            class="form-control"
+            #newServerContent>
+        <br>
+        <button
+            class="btn btn-primary"
+            (click)="onServerAdded(newServerName)">Add Server</button>
+        <button
+            class="btn btn-primary"
+            (click)="onBlueprintAdded(newServerName)">Add Blueprint</button>
+    </div>
+</div>

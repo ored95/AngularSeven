@@ -118,3 +118,78 @@ Recommend using Bootstrap 3+
 
     * Recipe (name, description, imagePath)
     * Ingredient (name, amount)
+
+## Part 3. Debugging
+0. Using [Augury](https://augury.rangle.io/) to dive into our Angular Apps.
+
+1. Assigning an Alias to custom properties:
+```ts
+    @Input('srvElement') element : {type: string, name: string, content: string};
+```
+2. Binding to custom events
+```html
+    <app-server 
+        (serverCreated)="onServerAdded($event)"
+        (blueprintCreated)="onBlueprintAdded($event)">
+    </app-server>
+```
+* Now, let's see how to emit an object in Angular
+
+```ts
+    import { EventEmitter, Output } from '@angular/core';
+
+    @Output() serverCreated = new EventEmitter<{serverName: string, serverContent: string}>();
+    
+    newServerName = ''
+    newServerContent = ''
+
+    onServerAdded() {
+        this.serverCreated.emit({
+            serverName: this.newServerName,
+            serverContent: this.newServerContent
+        });
+    }
+```
+* Here, the method onServerAdded() is also declared in other script file (up/down level)
+```ts
+    serverElements = [];
+
+    onServerAdded(serverData: {serverName: string, serverContent: string}) {
+        this.serverElements.push({
+            type: 'server',
+            name: serverData.serverName,
+            content: serverData.serverContent
+        });
+    }
+```
+* How to listen from outside?
+```ts
+    @Output('bpCreated') blueprintCreated = new EventEmitter<{serverName: string, serverContent: string}>();
+```
+* Using Local References in Templates
+```html
+    <input
+        type="text"
+        class="form-control"
+        #addedServer>
+    <button
+        class="btn btn-primary"
+        (click)="onServerAdded(addedServer)">Add Server</button>
+```
+```ts
+    onServerAdded(addedServer: HTMLInputElement) {
+        this.serverCreated.emit({
+            serverName: addedServer.value,
+            serverContent: this.newServerContent
+        });
+    }
+```
+3. **Lifecycle**
++ **ngOnChanges** - called after a bound input property changes
++ **ngOnInit** - called once the component is initialized
++ **ngDoCheck** - called during every change detection run
++ **ngAfterContentInit** - called after content (ng-content) has been projected into view
++ **ngAfterContentChecked** - called every time the projected content has been checked
++ **ngAfterViewInit** - called after the component's view (and child views) has been initialized
++ **ngAfterViewChecked** - called every time (and child views) have been checked
++ **ngOnDestroy** - Called once the component is about to be destroyed
