@@ -23,7 +23,8 @@
 </ng-template>
 <app-server *ngFor="let server of servers"></app-server> -->
 <div class="panel panel-default">
-    <div class="panel-heading">{{ element.name }}</div>
+    <!-- <div class="panel-heading">{{ element.name }}</div> -->
+    <div class="panel-heading" #heading>{{ name }}</div>
     <div class="panel-body">
         <ng-content>
             

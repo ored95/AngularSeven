@@ -6,10 +6,14 @@
         <div class="col-xs-12">
             <h3>The Basics</h3>
             <hr>
+            <button class="btn btn-primary" (click)="onChangeFirst()">Change first element</button>
+            <button class="btn btn-danger" (click)="onDestroyFirst()">Destroy first element</button>
+            <br><br>
             <app-servers
                 *ngFor="let serverElement of serverElements"
-                [srvElement]="serverElement">
-                <p>
+                [srvElement]="serverElement"
+                [name]="serverElement.name">
+                <p #contentParagraph>
                     <strong *ngIf="serverElement.type === 'server'" style="color: red">{{ serverElement.content }}</strong>
                     <em *ngIf="serverElement.type === 'blueprint'">{{ serverElement.content }}</em>
                 </p>
