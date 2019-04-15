@@ -18,4 +18,18 @@ export class ShoppingListComponent implements OnInit {
   ngOnInit() {
   }
 
+  onIngredientAdded(ingredient: Ingredient) {
+    var i = 0;
+    while (i < this.ingredients.length) {
+      if (this.ingredients[i].name == ingredient.name)
+        break;
+      i++;
+    }
+
+    if (i == this.ingredients.length)
+      this.ingredients.push(ingredient);
+    else {
+      this.ingredients[i].amount += parseInt(ingredient.amount.toString());
+    }
+  }
 }
