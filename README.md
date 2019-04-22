@@ -193,3 +193,69 @@ Recommend using Bootstrap 3+
 + **ngAfterViewInit** - called after the component's view (and child views) has been initialized
 + **ngAfterViewChecked** - called every time (and child views) have been checked
 + **ngOnDestroy** - Called once the component is about to be destroyed
+
+## Part 4. Services Dependency Injection
+1. Setting up the Services
+```ts
+    // recipe.service.ts
+    import { Recipe } from './recipe.model';
+
+    export class RecipeService {
+        
+        private recipes: Recipe[] = [<recipes>]
+
+        getRecipes() {
+            return this.recipes.slice();
+        }
+    }
+```
+2. Using a Service for Cross-Component Communication
+```ts
+    export class RecipeListComponent implements OnInit {
+        recipes: Recipe[];
+
+        constructor(private serviceRecipe: RecipeService) { }
+
+        ngOnInit() {
+            this.recipes = this.serviceRecipe.getRecipes();
+        }
+    }
+```
+3. Using Services for Push Notifications
+```ts
+    //shopping-list.component.ts
+    ingredients: Ingredient[];
+
+    constructor(private serviceSL: ShoppingListService) { }
+
+    ngOnInit() {
+        this.ingredients = this.serviceSL.getIngredients();
+        this.serviceSL.ingredientChanged.subscribe(
+            (ingredients: Ingredient[]) => {
+                this.ingredients = ingredients; 
+            }
+        );
+    }
+```
+4. Passing Ingredients from Recipes to the Shopping List (via a Service)
+```ts
+    //recipe.service.ts
+    import { Recipe } from './recipe.model';
+    import { EventEmitter, Injectable } from '@angular/core';
+    import { Ingredient } from '../shared/ingredient.model';
+    import { ShoppingListService } from '../shopping-list/shopping-list.service';
+
+    @Injectable()
+    export class RecipeService {
+        // ...
+        constructor(private serviceSL: ShoppingListService) {}
+        
+        getRecipes() {
+            return this.recipes.slice();
+        }
+
+        addIngredientsToShoppingList(ingredients: Ingredient[]) {
+            this.serviceSL.addIngredients(ingredients);
+        }
+    }
+```
