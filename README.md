@@ -259,3 +259,50 @@ Recommend using Bootstrap 3+
         }
     }
 ```
+## Part 5. Forms, Controls and Validations
+
+Note: See all changes in two previous commits!
+
+## Part 6. Http requests
+1. Introduction to [Firebase](https://firebase.google.com/): Store and sync data in real time
+2. [Tutorial](https://www.techiediaries.com/angular-by-example-httpclient-get/): Angular 7|6 By Example: HTTP GET Requests with HttpClient (Services, async pipe and Observables)
+
+3. Part of project
+
+* Setting up HttpClient:
+```ts
+    //app.module.ts
+    import { HttpClientModule } from '@angular/common/http';
+
+    imports: [
+        BrowserModule,
+        FormsModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        HttpClientModule
+    ],
+```
+* Sending PUT Requests to Save Data:
+```ts
+    //data-storage.service.ts
+    import { Observable } from 'rxjs';
+
+    /** PUT: update the recipes on the server. Returns the updated recipes upon success. */
+    storeRecipes() : Observable<Recipe> {
+        return this.http.put<Recipe>(this.dbURL, this.recipeService.getRecipes());
+    }
+```
+
+* Fetching back our data from [Firebase](https://firebase.google.com/):
+```ts
+    //data-storage.service.ts
+    /** GET: Fetch the recipes on the server. Returns the sync recipes upon success. */
+    getRecipes() {
+        this.http.get<Recipe[]>(this.dbURL)
+            .subscribe(
+                (response) => {
+                    this.recipeService.setRecipes(response);
+                }
+            );
+    }
+```
