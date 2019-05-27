@@ -306,3 +306,68 @@ Note: See all changes in two previous commits!
             );
     }
 ```
+
+## Part 7. Authencation
+1. Install firebase
+```bash
+    npm cache clean --force
+    npm install --save firebase
+```
+
+2. Setting up signin and signup routes
+```ts
+    //app-routing.module.ts
+    { path: 'signup', component: SignupComponent },
+    { path: 'signin', component: SigninComponent },
+```
+
+3. Authencation
+
+    Let's see an example of sign in authencation
+
+```ts
+    signinUser(email: string, password: string) {
+    firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(
+            response => {
+            this.router.navigate(['/']);
+            firebase.auth().currentUser.getIdToken()
+                .then(
+                (token: string) => this.token = token
+                )
+            }
+        )
+        .catch(
+            error => console.log(error)
+        );
+    }
+```
+
+4. Authencation to Route protection
+```ts
+    import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+
+    @Injectable()
+    export class AuthGuard implements CanActivate {
+
+        constructor(private authService: AuthService) {}
+
+        canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+            return this.authService.isAuthenticated();
+        }
+    }
+```
+
++ Here, user can only be activated when they have their own token:
+```ts
+    isAuthenticated() {
+        return this.token != null;
+    }
+```
+
+5. Redirection and Wrap up
+```go
+    // For a test
+    Email: test@test.com
+    Password: 123123
+```
