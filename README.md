@@ -371,3 +371,12 @@ Note: See all changes in two previous commits!
     Email: test@test.com
     Password: 123123
 ```
+
+## Part 8. Optimizations
+1. Feature shared module
+2. Lazy loading
+3. Core module
+4. Preloading
+5. Fix bug of AoT (issue [#9](https://github.com/Oreder/AngularSeven/issues/9))
+
+## Part 9. Deployment

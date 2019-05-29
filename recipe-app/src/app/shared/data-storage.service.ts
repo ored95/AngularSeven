@@ -1,33 +1,42 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 
 import { RecipeService } from '../recipes/recipe.service';
 import { Recipe } from '../recipes/recipe.model';
-import { Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 
 @Injectable()
 export class DataStorageService {
-    constructor(private http: HttpClient,
+    constructor(private httpClient: HttpClient,
                 private recipeService: RecipeService,
-                private authService: AuthService) { }
+                private authService: AuthService) {
+    }
 
-    dbURL: string = 'https://ng-recipe-book-cf1f9.firebaseio.com/recipes.json?auth=';
+    dbURL: string = 'https://ng-recipe-book-cf1f9.firebaseio.com/recipes.json';
 
     /** PUT: update the recipes on the server. Returns the updated recipes upon success. */
-    storeRecipes() : Observable<Recipe> {
-        const token = this.authService.getIdToken();
-        return this.http.put<Recipe>(this.dbURL + token, this.recipeService.getRecipes());
+    storeRecipes() {
+        // const headers = new HttpHeaders().set('Authorization', 'Bearer afdklasflaldf');
+    
+        // return this.httpClient.put('https://ng-recipe-book-3adbb.firebaseio.com/recipes.json', this.recipeService.getRecipes(), {
+        //   observe: 'body',
+        //   params: new HttpParams().set('auth', token)
+        //   // headers: headers
+        // });
+        const req = new HttpRequest('PUT', this.dbURL, this.recipeService.getRecipes(), {reportProgress: true});
+        return this.httpClient.request(req);
     }
 
     /** GET: Fetch the recipes on the server. Returns the sync recipes upon success. */
     getRecipes() {
-        const token = this.authService.getIdToken();
-
-        this.http.get<Recipe[]>(this.dbURL + token)
+        // this.httpClient.get<Recipe[]>('https://ng-recipe-book-3adbb.firebaseio.com/recipes.json?auth=' + token)
+        this.httpClient.get<Recipe[]>(this.dbURL, {
+            observe: 'body',
+            responseType: 'json'
+        })
             .subscribe(
-                (response) => {
-                    this.recipeService.setRecipes(response);
+                (recipes: Recipe[]) => {
+                    this.recipeService.setRecipes(recipes);
                 }
             );
     }
