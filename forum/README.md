@@ -1,14 +1,4 @@
-[![Build Status](https://travis-ci.org/hamzahamidi/angular-forum.svg?branch=master)](https://travis-ci.org/hamzahamidi/angular-forum/)
-[![GitHub release](https://img.shields.io/github/release/hamzahamidi/angular-forum.svg)](https://github.com/hamzahamidi/angular-forum/releases/latest)
-[![GitHub license](https://img.shields.io/github/license/hamzahamidi/angular-forum.svg)](https://github.com/hamzahamidi/angular-forum)
-
-
-> ### Angular project containing real world examples (CRUD, auth, advanced patterns, etc).
-
-# ![Angular Forum App](logo.png)
-
-
-### [Demo](http://hamidihamza.com/angular-forum)&nbsp;&nbsp;&nbsp;&nbsp;
+# Angular Forum App
 
 This codebase was created to demonstrate a fully fledged application built with Angular that interacts with an actual backend server including CRUD operations, authentication, routing, pagination, and more.
 
