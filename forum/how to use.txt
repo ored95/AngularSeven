@@ -1,0 +1,1 @@
+We use Yarn to manage the dependencies, so we strongly recommend you to use Yarn. you can install it from Here, then run yarn install --frozen-lockfile to resolve all dependencies (might take a minute).
