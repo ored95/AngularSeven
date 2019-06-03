@@ -1,4 +1,5 @@
-# Angular Forum App
+# Angular Forum App  [![Build Status](https://travis-ci.org/Oreder/AngularSeven.svg?branch=course)](https://travis-ci.org/Oreder/AngularSeven)
+
 
 This codebase was created to demonstrate a fully fledged application built with Angular that interacts with an actual backend server including CRUD operations, authentication, routing, pagination, and more.
 
